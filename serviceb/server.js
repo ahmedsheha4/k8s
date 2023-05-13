@@ -6,9 +6,9 @@ const app = express();
 app.use(cors());
 
 app.get("/", (_req, res) => {
-  res.json({ msg: "Server B" });
+  res.json({ msg: "Service B" });
 });
 
-app.listen(5000, () => {
-  console.log("Server listening on port 5000");
+app.listen(4002, () => {
+  console.log("Server listening on port 4002");
 });
