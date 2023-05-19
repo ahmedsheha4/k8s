@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: serviceb-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: serviceb
+  template:
+    metadata:
+      labels:
+        component: serviceb
+    spec:
+      containers:
+        - name: serviceb
+          image: ahmedsheha/serviceb
+          ports:
+            - containerPort: 4002

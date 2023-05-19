@@ -10,8 +10,8 @@ app.get("/service/:service", async (req, res) => {
     const services = ["a", "b"];
     const service = req.params.service?.toLowerCase();
     if (!services.includes(service)) return res.send("invalid service");
-    const port = service === "a" ? 4001 : 4002;
-    const apiRes = await axios.get(`http://localhost:${port}`);
+    // to be replaced with internal cluster communication using the service name and service port
+    const apiRes = await axios.get(`http://localhost/service${service}`);
     res.json({ msg: `Service ${apiRes.data.msg}` });
   } catch (err) {
     res.status(500).json({ msg: "Server Error..." });

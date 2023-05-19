@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: servicea-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: servicea
+  template:
+    metadata:
+      labels:
+        component: servicea
+    spec:
+      containers:
+        - name: servicea
+          image: ahmedsheha/servicea
+          ports:
+            - containerPort: 4001

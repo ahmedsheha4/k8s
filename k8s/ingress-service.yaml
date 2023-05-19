@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: Exact
+            backend:
+              service:
+                name: gateway-cluster-ip-service
+                port:
+                  number: 4000
+          - path: /servicea(/|$)(.*)
+            pathType: Exact
+            backend:
+              service:
+                name: servicea-cluster-ip-service
+                port:
+                  number: 4001
+          - path: /serviceb(/|$)(.*)
+            pathType: Exact
+            backend:
+              service:
+                name: serviceb-cluster-ip-service
+                port:
+                  number: 4002
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-cluster-ip-service
+                port:
+                  number: 80
